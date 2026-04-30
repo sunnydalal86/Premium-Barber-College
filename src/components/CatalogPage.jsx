@@ -66,7 +66,7 @@ export default function CatalogPage({ onNavigate }) {
           <img
             src="/logo.png"
             alt="Premium Barber College"
-            className="mx-auto h-52 md:h-64 w-auto mb-8"
+            className="mx-auto h-auto md:h-64 max-w-[90vw] md:max-w-none w-auto mb-8"
           />
           <p className="text-neutral-400 text-lg">
             461 S Capitol Ave #17 &middot; San Jose, CA 95127 &middot; (408) 649-3606
