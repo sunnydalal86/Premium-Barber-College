@@ -64,7 +64,7 @@ export default function CatalogPage({ onNavigate }) {
       <div className="bg-neutral-950 text-white py-16 md:py-24">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 text-center">
           <img
-            src="/logo.svg"
+            src="/logo.png"
             alt="Premium Barber College"
             className="mx-auto h-52 md:h-64 w-auto mb-8"
           />

@@ -38,7 +38,7 @@ export default function Hero() {
           className="mb-8"
         >
           <img
-            src="/logo.svg"
+            src="/logo.png"
             alt="Premium Barber College"
             className="mx-auto h-44 sm:h-56 md:h-72 lg:h-80 w-auto"
             fetchPriority="high"

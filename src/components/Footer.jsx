@@ -34,7 +34,7 @@ export default function Footer({ onNavigate }) {
           {/* Brand */}
           <div>
             <img
-              src="/logo.svg"
+              src="/logo.png"
               alt="Premium Barber College"
               className="h-20 w-auto"
             />

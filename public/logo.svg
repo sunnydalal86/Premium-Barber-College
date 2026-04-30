@@ -8,11 +8,9 @@
       }
 
       .st6 {
-        filter: url(#outer-glow-2);
       }
 
       .st7 {
-        filter: url(#outer-glow-1);
       }
 
       .st1 {
@@ -79,20 +77,6 @@
         stroke-width: 9.61px;
       }
     </style>
-    <filter id="outer-glow-1" x="2.64" y="116.4" width="838.56" height="332.16" filterUnits="userSpaceOnUse">
-      <feOffset dx="0" dy="0"/>
-      <feGaussianBlur result="blur" stdDeviation="10"/>
-      <feFlood flood-color="#caa849" flood-opacity="1"/>
-      <feComposite in2="blur" operator="in"/>
-      <feComposite in="SourceGraphic"/>
-    </filter>
-    <filter id="outer-glow-2" x="32.86" y="146.46" width="778.05" height="217.98" filterUnits="userSpaceOnUse">
-      <feOffset dx="0" dy="0"/>
-      <feGaussianBlur result="blur1" stdDeviation="8.53"/>
-      <feFlood flood-color="#f9f9fa" flood-opacity=".75"/>
-      <feComposite in2="blur1" operator="in"/>
-      <feComposite in="SourceGraphic"/>
-    </filter>
   </defs>
   <g>
     <g class="st7">

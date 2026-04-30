@@ -59,7 +59,7 @@ export default function Navbar({ onNavigate }) {
             aria-label="Premium Barber College home"
           >
             <img
-              src="/logo.svg"
+              src="/logo.png"
               alt="Premium Barber College"
               className="h-14 md:h-16 w-auto max-w-[240px] md:max-w-[320px]"
             />
