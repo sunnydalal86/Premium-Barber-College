@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { MapPin, Phone, Mail, Send, CheckCircle2 } from 'lucide-react'
+import { MapPin, Phone, Mail, Send, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -8,7 +8,7 @@ const fadeUp = {
 }
 
 export default function Contact() {
-  const [submitted, setSubmitted] = useState(false)
+  const [status, setStatus] = useState('idle')
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -20,14 +20,34 @@ export default function Contact() {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
-    const subject = encodeURIComponent('New Website Inquiry from ' + formData.name)
-    const body = encodeURIComponent(
-      `Name: ${formData.name}\nPhone: ${formData.phone}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
-    )
-    window.location.href = `mailto:premiumbarbercollege@gmail.com?subject=${subject}&body=${body}`
-    setSubmitted(true)
+    setStatus('submitting')
+
+    try {
+      const body = new URLSearchParams({
+        'form-name': 'contact',
+        name: formData.name,
+        phone: formData.phone,
+        email: formData.email,
+        message: formData.message,
+      })
+
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: body.toString(),
+      })
+
+      if (response.ok) {
+        setStatus('success')
+        setFormData({ name: '', phone: '', email: '', message: '' })
+      } else {
+        setStatus('error')
+      }
+    } catch {
+      setStatus('error')
+    }
   }
 
   return (
@@ -59,7 +79,7 @@ export default function Contact() {
             variants={fadeUp}
             className="lg:col-span-3"
           >
-            {submitted ? (
+            {status === 'success' ? (
               <div className="flex flex-col items-center justify-center rounded-2xl border border-gold/30 bg-gold/5 p-10 text-center">
                 <CheckCircle2 className="h-16 w-16 text-gold" />
                 <h3 className="mt-4 text-2xl font-bold">Thank You!</h3>
@@ -69,7 +89,26 @@ export default function Contact() {
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-5">
+              <form
+                name="contact"
+                method="POST"
+                data-netlify="true"
+                netlify-honeypot="bot-field"
+                onSubmit={handleSubmit}
+                className="space-y-5"
+              >
+                <input type="hidden" name="form-name" value="contact" />
+                <p className="hidden">
+                  <label>
+                    Don't fill this out: <input name="bot-field" />
+                  </label>
+                </p>
+                {status === 'error' && (
+                  <div className="flex items-center gap-3 rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-400">
+                    <AlertCircle className="h-5 w-5 shrink-0" />
+                    Something went wrong. Please try again or call us directly.
+                  </div>
+                )}
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-neutral-300 mb-1.5">
                     Full Name
@@ -133,10 +172,15 @@ export default function Contact() {
                 </div>
                 <button
                   type="submit"
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gold px-8 py-4 text-base font-bold text-neutral-950 shadow-lg shadow-gold/20 transition-all hover:bg-gold-light hover:shadow-xl hover:shadow-gold/30 hover:-translate-y-0.5 sm:w-auto"
+                  disabled={status === 'submitting'}
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gold px-8 py-4 text-base font-bold text-neutral-950 shadow-lg shadow-gold/20 transition-all hover:bg-gold-light hover:shadow-xl hover:shadow-gold/30 hover:-translate-y-0.5 sm:w-auto disabled:opacity-60 disabled:pointer-events-none"
                 >
-                  <Send className="h-5 w-5" aria-hidden="true" />
-                  Submit Request
+                  {status === 'submitting' ? (
+                    <Loader2 className="h-5 w-5 animate-spin" aria-hidden="true" />
+                  ) : (
+                    <Send className="h-5 w-5" aria-hidden="true" />
+                  )}
+                  {status === 'submitting' ? 'Sending...' : 'Submit Request'}
                 </button>
               </form>
             )}
