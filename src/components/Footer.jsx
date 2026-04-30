@@ -36,7 +36,7 @@ export default function Footer({ onNavigate }) {
             <img
               src="/logo.svg"
               alt="Premium Barber College"
-              className="h-14 w-auto"
+              className="h-20 w-auto"
             />
             <p className="mt-4 text-sm text-neutral-500 leading-relaxed">
               Preparing students for successful careers in the barber industry

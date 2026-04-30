@@ -61,7 +61,7 @@ export default function Navbar({ onNavigate }) {
             <img
               src="/logo.svg"
               alt="Premium Barber College"
-              className="h-12 md:h-14 w-auto max-w-[200px] md:max-w-[260px]"
+              className="h-14 md:h-16 w-auto max-w-[240px] md:max-w-[320px]"
             />
           </a>
 

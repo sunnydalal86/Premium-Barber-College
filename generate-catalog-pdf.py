@@ -1,4 +1,9 @@
+import os
 from fpdf import FPDF
+
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+LOGO_PNG = os.path.join(SCRIPT_DIR, 'public', 'logo.png')
+OUTPUT_PDF = os.path.join(SCRIPT_DIR, 'public', 'catalog.pdf')
 
 GOLD = (201, 168, 76)
 DARK = (40, 40, 40)
@@ -6,6 +11,7 @@ MID = (60, 60, 60)
 BODY = (50, 50, 50)
 LIGHT = (100, 100, 100)
 MUTED = (150, 150, 150)
+COVER_BG = (255, 255, 255)
 
 TOC_ENTRIES = [
     'Institutional Mission and Objectives',
@@ -311,7 +317,7 @@ pass1.set_auto_page_break(auto=True, margin=20)
 # Page 1: cover (same as final)
 pass1.add_page()
 pass1.ln(20)
-pass1.image('/Users/sundalal/premium-barber-college/public/logo.png', x=30, w=150)
+pass1.image(LOGO_PNG, x=25, w=160)
 pass1.ln(12)
 pass1.ln(12)
 pass1.set_font('Helvetica', '', 12)
@@ -368,7 +374,7 @@ for entry in TOC_ENTRIES:
 # Page 1: Cover
 pdf.add_page()
 pdf.ln(20)
-pdf.image('/Users/sundalal/premium-barber-college/public/logo.png', x=30, w=150)
+pdf.image(LOGO_PNG, x=25, w=160)
 pdf.ln(12)
 pdf.set_draw_color(*GOLD)
 pdf.set_line_width(1.2)
@@ -439,5 +445,5 @@ if all_ok:
 else:
     print('\nWARNING: Some entries have mismatched pages!')
 
-pdf.output('/Users/sundalal/premium-barber-college/public/catalog.pdf')
-print('PDF saved to public/catalog.pdf')
+pdf.output(OUTPUT_PDF)
+print(f'PDF saved to {OUTPUT_PDF}')

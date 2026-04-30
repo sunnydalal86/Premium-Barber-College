@@ -40,7 +40,7 @@ export default function Hero() {
           <img
             src="/logo.svg"
             alt="Premium Barber College"
-            className="mx-auto h-36 sm:h-44 md:h-56 lg:h-64 w-auto"
+            className="mx-auto h-44 sm:h-56 md:h-72 lg:h-80 w-auto"
             fetchPriority="high"
           />
         </motion.div>
